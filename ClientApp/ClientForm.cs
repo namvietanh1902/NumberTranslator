@@ -54,6 +54,8 @@ namespace ClientApp
         {
             socket.Close();
             stream.Close();
+            client.Dispose();
+            client.Close();
         }
         void Send()
         {
@@ -64,6 +66,11 @@ namespace ClientApp
                 writer.AutoFlush = true;
 
                 writer.WriteLine(txtNumber.Text);
+                if (txtNumber.Text == "Bye")
+                {
+                    this.Close();
+                }
+                txtNumber.Text = String.Empty;
 
                 
                 

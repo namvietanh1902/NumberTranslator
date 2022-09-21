@@ -15,35 +15,38 @@ using System.Windows.Forms;
 namespace ServerApp
 {
     public partial class ServerForm : Form
-    {
+    {   
+        
         public ServerForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
         }
         IPEndPoint IP;
-        Socket socket;
+       
         TcpListener server;
-        Stream stream;
+        Thread listen;
 
-        private void btnSend_Click(object sender, EventArgs e)
-        {
-            Send();
-        }
+
+        List<TcpClient> clients;
+
+    
         void Connect()
         {
             try
-            {
-                IP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
+            {   
+
+                IP = new IPEndPoint(IPAddress.Any, 9000);
                 
                 server = new TcpListener(IP);
                 server.Start();
-                socket = server.AcceptSocket();
-                stream = new NetworkStream(socket);
-                
-                Thread listen = new Thread(Receive);
+                listen = new Thread(Receive);
                 listen.IsBackground = true;
                 listen.Start();
+                    
+                
+
+
             }
             catch (Exception ex)
             {
@@ -53,13 +56,37 @@ namespace ServerApp
         void CloseThread()
         {   
 
-            socket.Close();
-            stream.Close();
+            
+            
             server.Stop();
+            
         }
         void Send()
         {
 
+        }
+        private static bool TestConnection(TcpClient client)
+        {
+            bool sConnected = true;
+
+            if (client.Client.Poll(0, SelectMode.SelectRead))
+            {
+                if (!client.Connected) sConnected = false;
+                else
+                {
+                    byte[] b = new byte[1];
+                    try
+                    {
+                        if (client.Client.Receive(b, SocketFlags.Peek) == 0)
+                        {
+                            // Client disconnected
+                            sConnected = false;
+                        }
+                    }
+                    catch { sConnected = false; }
+                }
+            }
+            return sConnected;
         }
 
         void Receive()
@@ -68,9 +95,27 @@ namespace ServerApp
             {
                 while (true)
                 {
-                    var reader = new StreamReader(stream);
-                    string str = reader.ReadLine();
-                    listView1.Items.Add(str);
+                    Thread handleThread = new Thread(() =>
+                   {
+
+                        var client = server.AcceptTcpClient();
+                        Stream stream = client.GetStream();
+                        while (TestConnection(client)) { 
+                        var reader = new StreamReader(stream);
+                        string str = reader.ReadLine();
+                        listView1.Items.Add(str);
+                           
+                           if (str == "Bye")
+                           {
+                               stream.Close();
+                               break;
+                           }
+                       }
+                        client.Close();
+                       stream.Close();
+
+                   });
+                    handleThread.Start();
                 }
             }
             catch (Exception ex)
@@ -84,7 +129,7 @@ namespace ServerApp
 
         private void ServerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CloseThread();
+            
             Dispose();
         }
 
@@ -96,6 +141,13 @@ namespace ServerApp
         private void button1_Click(object sender, EventArgs e)
         {
             Connect();
+        }
+
+        private void btnDis_Click(object sender, EventArgs e)
+        {
+           
+            CloseThread();
+
         }
     }
 }
