@@ -1,0 +1,11 @@
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\bin\Debug\ClientApp.exe.config
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\bin\Debug\ClientApp.exe
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\bin\Debug\ClientApp.pdb
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.csproj.AssemblyReference.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.ClientForm.resources
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.Properties.Resources.resources
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.csproj.GenerateResource.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.csproj.CoreCompileInputs.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.exe
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.pdb

@@ -1,0 +1,5 @@
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\obj\Debug\NumberTranslator.csproj.AssemblyReference.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\obj\Debug\NumberTranslator.csproj.SuggestedBindingRedirects.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\obj\Debug\NumberTranslator.Properties.Resources.resources
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\obj\Debug\NumberTranslator.csproj.GenerateResource.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\obj\Debug\NumberTranslator.csproj.CoreCompileInputs.cache

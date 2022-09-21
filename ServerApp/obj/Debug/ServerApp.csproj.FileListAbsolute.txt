@@ -1,0 +1,11 @@
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\bin\Debug\ServerApp.exe.config
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\bin\Debug\ServerApp.exe
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\bin\Debug\ServerApp.pdb
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.csproj.AssemblyReference.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.Properties.Resources.resources
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.csproj.GenerateResource.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.csproj.CoreCompileInputs.cache
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.exe
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.pdb
+C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.ServerForm.resources
