@@ -31,7 +31,7 @@ namespace ServerApp
         bool isStopping = false;
 
 
-        List<TcpClient> clients;
+      
 
     
         void Connect()
@@ -61,8 +61,9 @@ namespace ServerApp
 
             
             isStopping = true;
+            
             server.Stop();
-            listen.Abort();
+            
             
         }
         void Send(Stream stream,string str)
@@ -101,31 +102,34 @@ namespace ServerApp
             {
                 while (true)
                 {
+                   
                     Thread handleThread = new Thread(() =>
-                   {
-                       try
                        {
-                           var client = server.AcceptTcpClient();
-                           Stream stream = client.GetStream();
-                           
-                           while (TestConnection(client))
+                           try
                            {
-                               var reader = new StreamReader(stream);
-                               string str = reader.ReadLine();
-                               listView1.Items.Add(str);
-                               Send(stream,str);
+                               var client = server.AcceptTcpClient();
+                               Stream stream = client.GetStream();
+                           
+                               while (TestConnection(client))
+                               {
+                                   var reader = new StreamReader(stream);
+                                   string str = reader.ReadLine();
+                                   listView1.Items.Add(str);
+                                   Send(stream,str);
 
+                               }
+                               client.Close();
+                               stream.Close();
                            }
-                           client.Close();
-                           stream.Close();
-                       }
 
-                       catch (Exception err)
-                       {
-                           if(!isStopping) throw;
-                       }
-                   });
+                           catch (Exception err)
+                           {    
+                               if(!isStopping) throw;
+                           }
+                        });
+                    handleThread.IsBackground = true;
                     handleThread.Start(); }
+               
                 } 
                 
             

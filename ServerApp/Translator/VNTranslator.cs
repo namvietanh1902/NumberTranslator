@@ -10,6 +10,8 @@ namespace ServerApp.Translator
     {
         string[] units = {"","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"};
         string[] tens = {"mười", "mười một", "mười hai", "mười ba", "mười bốn", "mười lăm", "mười sáu", "mười bảy", "mười tám", "mười chín" };
+        string[] uppers = { };
+
         public string Translate(string str)
         {
             string result ="";

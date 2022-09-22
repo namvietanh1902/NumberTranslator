@@ -27,6 +27,7 @@ namespace ClientApp
         Socket socket;
         TcpClient client;
         Stream stream;
+        
 
         private void btnSend_Click(object sender, EventArgs e)
         {
@@ -47,34 +48,39 @@ namespace ClientApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Cannot connect to server");
+                
             }
         }
         void CloseThread()
-        {
-            socket.Close();
-            stream.Close();
-            client.Dispose();
-            client.Close();
+        {   
+            if (socket != null)
+            {
+                socket.Close();
+                client.Close();
+            }
+            else if (stream != null)
+            {
+                stream.Close();
+            }
         }
         void Send()
-        {
+        {   
             if (txtNumber.Text != String.Empty)
             {
-                
-                var writer = new StreamWriter(stream);
-                writer.AutoFlush = true;
+                var validator = new ClientApp.Validator.NumberValidator();
 
-                writer.WriteLine(txtNumber.Text);
-                if (txtNumber.Text == "Bye")
+                var writer = new StreamWriter(stream);
+                if (validator.checkNumber(txtNumber.Text))
                 {
-                    this.Close();
+                    writer.AutoFlush = true;
+                    writer.WriteLine(txtNumber.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Số nhập vào không đúng format", "Lỗi người dùng");
                 }
                 txtNumber.Text = String.Empty;
-
-                
-                
-                
             }
            
         }

@@ -8,6 +8,8 @@ namespace ServerApp.Translator
 {
     public interface ITranslator
     {
-        void Translate(string str);
+        string Translate(string str);
+
+
     }
 }
