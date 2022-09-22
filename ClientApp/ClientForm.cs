@@ -87,7 +87,7 @@ namespace ClientApp
                 {
                     var reader = new StreamReader(stream);
                     string str = reader.ReadLine();
-                    Console.WriteLine(str);
+                    txtResult.Text = str;
                 }
             }
             catch(Exception ex)

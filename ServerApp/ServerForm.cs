@@ -20,12 +20,15 @@ namespace ServerApp
         public ServerForm()
         {
             InitializeComponent();
+            
             CheckForIllegalCrossThreadCalls = false;
+            Connect();
         }
         IPEndPoint IP;
        
         TcpListener server;
         Thread listen;
+        bool isStopping = false;
 
 
         List<TcpClient> clients;
@@ -41,8 +44,8 @@ namespace ServerApp
                 server = new TcpListener(IP);
                 server.Start();
                 listen = new Thread(Receive);
-                listen.IsBackground = true;
                 listen.Start();
+                listen.IsBackground = true;
                     
                 
 
@@ -57,12 +60,15 @@ namespace ServerApp
         {   
 
             
-            
+            isStopping = true;
             server.Stop();
+            listen.Abort();
             
         }
-        void Send()
+        void Send(Stream stream,string str)
         {
+            var writer = new StreamWriter(stream);
+            writer.WriteLine(str);
 
         }
         private static bool TestConnection(TcpClient client)
@@ -97,39 +103,42 @@ namespace ServerApp
                 {
                     Thread handleThread = new Thread(() =>
                    {
-
-                        var client = server.AcceptTcpClient();
-                        Stream stream = client.GetStream();
-                        while (TestConnection(client)) { 
-                        var reader = new StreamReader(stream);
-                        string str = reader.ReadLine();
-                        listView1.Items.Add(str);
+                       try
+                       {
+                           var client = server.AcceptTcpClient();
+                           Stream stream = client.GetStream();
                            
-                           if (str == "Bye")
+                           while (TestConnection(client))
                            {
-                               stream.Close();
-                               break;
-                           }
-                       }
-                        client.Close();
-                       stream.Close();
+                               var reader = new StreamReader(stream);
+                               string str = reader.ReadLine();
+                               listView1.Items.Add(str);
+                               Send(stream,str);
 
+                           }
+                           client.Close();
+                           stream.Close();
+                       }
+
+                       catch (Exception err)
+                       {
+                           if(!isStopping) throw;
+                       }
                    });
-                    handleThread.Start();
-                }
-            }
+                    handleThread.Start(); }
+                } 
+                
+            
             catch (Exception ex)
             {
-                Close();
+                
             }
         }
-        byte[] Serialize() { return null; }
-        object Deserialize(byte[] data) { return null; }
+        
 
 
         private void ServerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
             Dispose();
         }
 
@@ -146,6 +155,16 @@ namespace ServerApp
         private void btnDis_Click(object sender, EventArgs e)
         {
            
+
+        }
+
+        private void ServerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
             CloseThread();
 
         }

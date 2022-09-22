@@ -73,7 +73,9 @@
             this.Controls.Add(this.listView1);
             this.Name = "ServerForm";
             this.Text = "Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServerForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ServerForm_FormClosed);
+            this.Load += new System.EventHandler(this.ServerForm_Load);
             this.ResumeLayout(false);
 
         }
