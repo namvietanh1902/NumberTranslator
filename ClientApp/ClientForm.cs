@@ -42,8 +42,7 @@ namespace ClientApp
                 client = new TcpClient();
                 client.Connect(IP);
                 stream = client.GetStream();
-                Thread listen = new Thread(Receive);
-                listen.IsBackground = true;
+                Task listen = new Task(Receive);
                 listen.Start();
             }
             catch (Exception ex)

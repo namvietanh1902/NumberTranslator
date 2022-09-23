@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ServerApp.Models;
 
 namespace ServerApp
 {
@@ -21,14 +22,19 @@ namespace ServerApp
         {
             InitializeComponent();
             
-            CheckForIllegalCrossThreadCalls = false;
+         
+            dgvClient.DataSource = clients;
             Connect();
+            
         }
         IPEndPoint IP;
        
         TcpListener server;
-        Thread listen;
+        
         bool isStopping = false;
+        
+        List<Client> clients = new List<Client>();
+        
 
 
       
@@ -43,9 +49,8 @@ namespace ServerApp
                 
                 server = new TcpListener(IP);
                 server.Start();
-                listen = new Thread(Receive);
+                Task listen = new Task(Receive);
                 listen.Start();
-                listen.IsBackground = true;
                     
                 
 
@@ -69,6 +74,7 @@ namespace ServerApp
         void Send(Stream stream,string str)
         {
             var writer = new StreamWriter(stream);
+            writer.AutoFlush = true;
             writer.WriteLine(str);
 
         }
@@ -103,18 +109,41 @@ namespace ServerApp
                 while (true)
                 {
                    
-                    Thread handleThread = new Thread(() =>
+                    Task handleThread = new Task(() =>
                        {
                            try
                            {
                                var client = server.AcceptTcpClient();
                                Stream stream = client.GetStream();
+                               
                            
                                while (TestConnection(client))
                                {
                                    var reader = new StreamReader(stream);
                                    string str = reader.ReadLine();
-                                   listView1.Items.Add(str);
+                                   
+                                   
+                                   if (str == null)
+                                   {
+                                       clients.Add(new Client
+                                       {
+                                           IP = client.Client.RemoteEndPoint.ToString(),
+                                           Language = "vi",
+                                           Request = "Disconnected"
+
+                                       });
+                                   }
+                                   else
+                                   {
+                                       clients.Add(new Client
+                                       {
+                                           IP = client.Client.RemoteEndPoint.ToString(),
+                                           Language = "vi",
+                                           Request = str
+
+                                       });
+                                   }
+                                   UpdateView(clients);
                                    Send(stream,str);
 
                                }
@@ -127,7 +156,7 @@ namespace ServerApp
                                if(!isStopping) throw;
                            }
                         });
-                    handleThread.IsBackground = true;
+                    
                     handleThread.Start(); }
                
                 } 
@@ -137,6 +166,14 @@ namespace ServerApp
             {
                 
             }
+        }
+        private void UpdateView(List<Client> clients)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                dgvClient.DataSource = null;
+                dgvClient.DataSource = clients;
+            }));
         }
         
 

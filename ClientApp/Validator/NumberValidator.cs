@@ -11,7 +11,7 @@ namespace ClientApp.Validator
     {   
         public bool checkNumber(string number)
         {
-            var regex = new Regex("^(?:-(?:[1-9](?:\\d{0,2}(?:,\\d{3})+|\\d*))|(?:0|(?:[1-9](?:\\d{0,2}(?:,\\d{3})+|\\d*))))(?:.\\d+|)$");
+            var regex = new Regex("^-?\\d*(\\.\\d+)?$");
             return regex.IsMatch(number);
         }
     }
