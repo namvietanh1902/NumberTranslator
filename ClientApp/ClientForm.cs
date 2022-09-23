@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClientApp.Model;
 
 namespace ClientApp
 {
@@ -20,8 +21,18 @@ namespace ClientApp
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
+            setCBB();
             Connect();
 
+        }
+        private void setCBB()
+        {
+            cbbLanguage.Items.AddRange(new LanguageCBB[]
+            {
+                new LanguageCBB{value = "vi", description = "Tiếng Việt"},
+                new LanguageCBB{value = "en",description="English"}
+            });
+            cbbLanguage.SelectedIndex = 0;
         }
         IPEndPoint IP; 
         Socket socket;
@@ -68,12 +79,14 @@ namespace ClientApp
             if (txtNumber.Text != String.Empty)
             {
                 var validator = new ClientApp.Validator.NumberValidator();
-
+                var txt = txtNumber.Text;
                 var writer = new StreamWriter(stream);
-                if (validator.checkNumber(txtNumber.Text))
+                if (validator.checkNumber(txt))
                 {
+                    txt += "-" + (cbbLanguage.SelectedItem as LanguageCBB).value;
                     writer.AutoFlush = true;
-                    writer.WriteLine(txtNumber.Text);
+
+                    writer.WriteLine(txt);
                 }
                 else
                 {

@@ -72,15 +72,26 @@ namespace ServerApp
             
             
         }
-        void Send(Stream stream,string str)
+        void Send(Stream stream,string number,string language)
         {   
-            if (str != null)
+            if (number != null)
             {
                 var writer = new StreamWriter(stream);
                 writer.AutoFlush = true;
-                EnTranslator translator = new EnTranslator();
+                ITranslator translator;
+                if (language == "en")
+                {
+                    translator = new EnTranslator();
+                    writer.WriteLine(translator.Translate(number));
+                }
+                else if (language == "vi")
+                {
+                    translator = new VNTranslator();
+                    writer.WriteLine(translator.Translate(number));
 
-                writer.WriteLine(translator.Translate(str));
+                }
+
+
 
             }
 
@@ -128,7 +139,8 @@ namespace ServerApp
                                {
                                    var reader = new StreamReader(stream);
                                    string str = reader.ReadLine();
-                                   
+                                   string language =null;
+                                   string number = null;
                                    
                                    if (str == null)
                                    {
@@ -142,16 +154,19 @@ namespace ServerApp
                                    }
                                    else
                                    {
+                                       language = str.Split('-')[1];
+                                       number = str.Split('-')[0];
+
                                        clients.Add(new Client
                                        {
                                            IP = client.Client.RemoteEndPoint.ToString(),
-                                           Language = "vi",
-                                           Request = str
+                                           Language = language,
+                                           Request = number
 
                                        });
                                    }
                                    UpdateView(clients);
-                                   Send(stream,str);
+                                   Send(stream,number,language);
 
                                }
                                client.Close();
