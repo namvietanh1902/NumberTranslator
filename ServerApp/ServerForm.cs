@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ServerApp.Models;
+using ServerApp.Translator;
 
 namespace ServerApp
 {
@@ -72,10 +73,16 @@ namespace ServerApp
             
         }
         void Send(Stream stream,string str)
-        {
-            var writer = new StreamWriter(stream);
-            writer.AutoFlush = true;
-            writer.WriteLine(str);
+        {   
+            if (str != null)
+            {
+                var writer = new StreamWriter(stream);
+                writer.AutoFlush = true;
+                EnTranslator translator = new EnTranslator();
+
+                writer.WriteLine(translator.Translate(str));
+
+            }
 
         }
         private static bool TestConnection(TcpClient client)
