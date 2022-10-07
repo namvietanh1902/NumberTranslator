@@ -28,18 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNumber = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.cbbLanguage = new System.Windows.Forms.ComboBox();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.txtInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // txtNumber
-            // 
-            this.txtNumber.Location = new System.Drawing.Point(99, 338);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(378, 22);
-            this.txtNumber.TabIndex = 0;
             // 
             // btnSend
             // 
@@ -67,29 +61,49 @@
             this.cbbLanguage.Size = new System.Drawing.Size(146, 24);
             this.cbbLanguage.TabIndex = 3;
             // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(654, 333);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(134, 27);
+            this.btnConnect.TabIndex = 1;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // txtInput
+            // 
+            this.txtInput.Location = new System.Drawing.Point(99, 333);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(356, 22);
+            this.txtInput.TabIndex = 4;
+            this.txtInput.Leave += new System.EventHandler(this.txtInput_Leave);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtInput);
             this.Controls.Add(this.cbbLanguage);
             this.Controls.Add(this.txtResult);
+            this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.txtNumber);
             this.Name = "ClientForm";
             this.Text = "Client";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientForm_FormClosed);
+            this.Load += new System.EventHandler(this.ClientForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.ComboBox cbbLanguage;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox txtInput;
     }
 }
 

@@ -21,174 +21,23 @@ namespace ServerApp
         
         public ServerForm()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            serverHandler = new ServerHandler();
+            serverHandler.updateView = new ServerHandler.UpdateView(UpdateView);
+            serverHandler.clients = new List<Client>();
+            dgvClient.DataSource = serverHandler.clients;
             
-         
-            dgvClient.DataSource = clients;
-            Connect();
             
         }
-        IPEndPoint IP;
-       
-        TcpListener server;
+        bool isConnected = false;
+        ServerHandler serverHandler;
         
-        bool isStopping = false;
-        
-        List<Client> clients = new List<Client>();
-        
-
-
-      
-
     
-        void Connect()
-        {
-            try
-            {   
+       
 
-                IP = new IPEndPoint(IPAddress.Any, 9000);
-                
-                server = new TcpListener(IP);
-                server.Start();
-                Task listen = new Task(Receive);
-                listen.Start();
-                    
-                
+        
 
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        void CloseThread()
-        {   
-
-            
-            isStopping = true;
-            
-            server.Stop();
-            
-            
-        }
-        void Send(Stream stream,string number,string language)
-        {   
-            if (number != null)
-            {
-                var writer = new StreamWriter(stream);
-                writer.AutoFlush = true;
-                ITranslator translator;
-                if (language == "en")
-                {
-                    translator = new EnTranslator();
-                    writer.WriteLine(translator.Translate(number));
-                }
-                else if (language == "vi")
-                {
-                    translator = new VNTranslator();
-                    writer.WriteLine(translator.Translate(number));
-
-                }
-
-
-
-            }
-
-        }
-        private static bool TestConnection(TcpClient client)
-        {
-            bool sConnected = true;
-
-            if (client.Client.Poll(0, SelectMode.SelectRead))
-            {
-                if (!client.Connected) sConnected = false;
-                else
-                {
-                    byte[] b = new byte[1];
-                    try
-                    {
-                        if (client.Client.Receive(b, SocketFlags.Peek) == 0)
-                        {
-                            // Client disconnected
-                            sConnected = false;
-                        }
-                    }
-                    catch { sConnected = false; }
-                }
-            }
-            return sConnected;
-        }
-
-        void Receive()
-        {
-            try
-            {
-                while (true)
-                {
-                   
-                    Task handleThread = new Task(() =>
-                       {
-                           try
-                           {
-                               var client = server.AcceptTcpClient();
-                               Stream stream = client.GetStream();
-                               
-                           
-                               while (TestConnection(client))
-                               {
-                                   var reader = new StreamReader(stream);
-                                   string str = reader.ReadLine();
-                                   string language =null;
-                                   string number = null;
-                                   
-                                   if (str == null)
-                                   {
-                                       clients.Add(new Client
-                                       {
-                                           IP = client.Client.RemoteEndPoint.ToString(),
-                                           Language = "vi",
-                                           Request = "Disconnected"
-
-                                       });
-                                   }
-                                   else
-                                   {
-                                       language = str.Split('-')[1];
-                                       number = str.Split('-')[0];
-
-                                       clients.Add(new Client
-                                       {
-                                           IP = client.Client.RemoteEndPoint.ToString(),
-                                           Language = language,
-                                           Request = number
-
-                                       });
-                                   }
-                                   UpdateView(clients);
-                                   Send(stream,number,language);
-
-                               }
-                               client.Close();
-                               stream.Close();
-                           }
-
-                           catch (Exception err)
-                           {    
-                               if(!isStopping) throw;
-                           }
-                        });
-                    
-                    handleThread.Start(); }
-               
-                } 
-                
-            
-            catch (Exception ex)
-            {
-                
-            }
-        }
+        
         private void UpdateView(List<Client> clients)
         {
             Invoke(new MethodInvoker(() =>
@@ -212,7 +61,20 @@ namespace ServerApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Connect();
+            if (!isConnected)
+            {
+                serverHandler.Connect();
+                isConnected = true;
+                connectBtn.Text = "Disconnect";
+            }
+            else
+            {
+                serverHandler.CloseThread();
+                isConnected = false;
+                connectBtn.Text = "Connect";
+
+            }
+            
         }
 
         private void btnDis_Click(object sender, EventArgs e)
@@ -228,7 +90,7 @@ namespace ServerApp
 
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseThread();
+            serverHandler.CloseThread();
 
         }
     }

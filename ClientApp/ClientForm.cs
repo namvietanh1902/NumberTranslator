@@ -22,7 +22,7 @@ namespace ClientApp
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             setCBB();
-            Connect();
+           
 
         }
         private void setCBB()
@@ -38,6 +38,7 @@ namespace ClientApp
         Socket socket;
         TcpClient client;
         Stream stream;
+        bool isConnected = false;
         
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -76,14 +77,14 @@ namespace ClientApp
         }
         void Send()
         {   
-            if (txtNumber.Text != String.Empty)
+            if (txtInput.Text != String.Empty)
             {
                 var validator = new ClientApp.Validator.NumberValidator();
-                var txt = txtNumber.Text;
+                var txt = txtInput.Text;
                 var writer = new StreamWriter(stream);
                 if (validator.checkNumber(txt))
                 {
-                    txt += "-" + (cbbLanguage.SelectedItem as LanguageCBB).value;
+                    txt += "*" + (cbbLanguage.SelectedItem as LanguageCBB).value;
                     writer.AutoFlush = true;
 
                     writer.WriteLine(txt);
@@ -92,7 +93,7 @@ namespace ClientApp
                 {
                     MessageBox.Show("Số nhập vào không đúng format", "Lỗi người dùng");
                 }
-                txtNumber.Text = String.Empty;
+                txtInput.Text = String.Empty;
             }
            
         }
@@ -105,7 +106,10 @@ namespace ClientApp
                 {
                     var reader = new StreamReader(stream);
                     string str = reader.ReadLine();
-                    txtResult.Text = str;
+                    Invoke(new MethodInvoker(() =>
+                    {
+                        txtResult.Text = str;
+                    }));
                 }
             }
             catch(Exception ex)
@@ -113,12 +117,36 @@ namespace ClientApp
                 Close();
             }
         }
-        byte[] Serialize() { return null; }
-        object Deserialize(byte[] data) { return null; }
 
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             CloseThread();
+        }
+
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {   
+            if (!isConnected)
+            {
+                btnConnect.Text = "Disconnect";
+                Connect();
+                isConnected = true;
+            }
+            else
+            {   
+                isConnected = false;
+                btnConnect.Text = "Connect";
+                CloseThread();
+            }
+        }
+
+        private void txtInput_Leave(object sender, EventArgs e)
+        {
+            
         }
     }
 }
