@@ -46,7 +46,7 @@ namespace ServerApp.Translator
                 groupText += _tens[tens];
                 if (units != 0)
                 {
-                    groupText += " " + _units[units];
+                    groupText += "-" + _units[units];
                 }
             }
             else if (tensUnits != 0)
