@@ -66,7 +66,7 @@ namespace ServerApp.Translator
             {
                 idx++;
                 group = val[i]+group;
-                if (idx == 3 || i<2)
+                if (idx == 3 || i<1)
                 {
                     res[unit++]= group;
                     idx = 0;
@@ -80,15 +80,16 @@ namespace ServerApp.Translator
         
         public string Translate(string value)
         {
+            string val = value.TrimStart(new char[] { '0' });
+            
+            if (val == "") return "Zero";
 
             if (value.StartsWith("-"))
             {
+                if (val.Substring(1).TrimStart(new char[] { '0' }) == "") return "Zero";
                 return "Minus " + Translate(value.Substring(1));
             }
             
-            string val = value.TrimStart(new char[] { '0' });
-            double x = Convert.ToDouble(val);
-            if (val == "") return "Zero";
             
             
             string[] digitGroups = FormatValue(val);

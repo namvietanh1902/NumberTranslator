@@ -43,7 +43,11 @@ namespace ClientApp
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            Send();
+            if (socket != null)
+            {
+                Send();
+            }
+            else MessageBox.Show("Chưa kết nối server");
         }
         void Connect() 
         {

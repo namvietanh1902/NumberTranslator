@@ -10,7 +10,7 @@ namespace ServerApp.Translator
     {
         string[] _units = new[] { "Không", "Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười Một", "Mười Hai", "Mười Ba", "Mười Bốn", "Mười Lăm", "Mười Sáu", "Mười Bảy", "Mười Tám", "Mười Chín" };
         string[] _tens = new[] { "Không", "Mười", "Hai Mươi", "Ba Mươi", "Bốn Mươi", "Năm Mươi", "Sáu Mươi", "Bảy Mươi", "Tám Mươi", "Chín Mươi" };
-        string[] _uppers = new[] { "", "Nghìn", "Triệu", "Tỷ", "Nghìn Tỷ", "Triệu Tỷ", "Tỷ Tỷ" };
+        string[] _uppers = new[] { "", "Nghìn", "Triệu", "Tỷ", "Nghìn Tỷ", "Triệu Tỷ", "Tỷ Tỷ" , "Nghìn Tỷ Tỷ", "Triệu Tỷ Tỷ", "Tỷ Tỷ Tỷ" };
 
 
 
@@ -45,12 +45,12 @@ namespace ServerApp.Translator
                     {
                         case 1:
                             {
-                                groupText += " " + "mốt";
+                                groupText += " " + "Mốt";
                                 break;
                             }
                         case 5:
                             {
-                                groupText += " " + "lăm";
+                                groupText += " " + "Lăm";
                                 break;
                             }
                         default:
@@ -80,7 +80,7 @@ namespace ServerApp.Translator
             {
                 idx++;
                 group = val[i] + group;
-                if (idx == 3 || i < 2)
+                if (idx == 3 || i < 1)
                 {
                     res[unit++] = group;
                     idx = 0;
@@ -95,13 +95,14 @@ namespace ServerApp.Translator
         public string Translate(string value)
         {
 
+            string val = value.TrimStart(new char[] { '0' });
+            if (val == "") return "Không";
             if (value.StartsWith("-"))
             {
+                if (val.Substring(1).TrimStart(new char[] { '0' }) == "") return "Không";
                 return "Âm " + Translate(value.Substring(1));
             }
 
-            string val = value.TrimStart(new char[] { '0' });
-            if (val == "") return "Không";
 
 
             string[] digitGroups = FormatValue(val);

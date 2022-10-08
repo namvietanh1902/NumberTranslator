@@ -51,9 +51,13 @@ namespace ServerApp
         {
 
 
-            isStopping = true;
+            
+            if(server != null)
+            {
+                isStopping = true;
+                server.Stop();
 
-            server.Stop();
+            }
 
 
         }

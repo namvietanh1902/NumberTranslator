@@ -48,13 +48,16 @@
             // txtResult
             // 
             this.txtResult.Location = new System.Drawing.Point(99, 43);
+            this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ReadOnly = true;
-            this.txtResult.Size = new System.Drawing.Size(404, 22);
+            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.txtResult.Size = new System.Drawing.Size(404, 184);
             this.txtResult.TabIndex = 2;
             // 
             // cbbLanguage
             // 
+            this.cbbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbLanguage.FormattingEnabled = true;
             this.cbbLanguage.Location = new System.Drawing.Point(528, 41);
             this.cbbLanguage.Name = "cbbLanguage";
