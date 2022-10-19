@@ -49,9 +49,10 @@
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClient.Location = new System.Drawing.Point(12, 12);
             this.dgvClient.Name = "dgvClient";
+            this.dgvClient.ReadOnly = true;
             this.dgvClient.RowHeadersWidth = 51;
             this.dgvClient.RowTemplate.Height = 24;
-            this.dgvClient.Size = new System.Drawing.Size(764, 150);
+            this.dgvClient.Size = new System.Drawing.Size(776, 150);
             this.dgvClient.TabIndex = 2;
             // 
             // ServerForm

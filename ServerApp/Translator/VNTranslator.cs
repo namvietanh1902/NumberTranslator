@@ -29,7 +29,7 @@ namespace ServerApp.Translator
 
                 if (tensUnits != 0)
                 {
-                    groupText += " và ";
+                    groupText += " ";
                 }
             }
             int tens = tensUnits / 10;

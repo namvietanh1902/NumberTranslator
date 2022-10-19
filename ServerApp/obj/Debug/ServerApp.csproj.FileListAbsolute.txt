@@ -9,3 +9,14 @@ C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.exe
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.pdb
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ServerApp\obj\Debug\ServerApp.ServerForm.resources
+E:\PBL4\PBL\ServerApp\bin\Debug\ServerApp.exe.config
+E:\PBL4\PBL\ServerApp\bin\Debug\ServerApp.exe
+E:\PBL4\PBL\ServerApp\bin\Debug\ServerApp.pdb
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.csproj.AssemblyReference.cache
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.csproj.SuggestedBindingRedirects.cache
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.Properties.Resources.resources
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.ServerForm.resources
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.csproj.GenerateResource.cache
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.csproj.CoreCompileInputs.cache
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.exe
+E:\PBL4\PBL\ServerApp\obj\Debug\ServerApp.pdb

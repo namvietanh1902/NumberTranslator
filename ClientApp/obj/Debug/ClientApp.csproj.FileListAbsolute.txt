@@ -9,3 +9,14 @@ C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.csproj.CoreCompileInputs.cache
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.exe
 C:\Users\Anh\source\repos\102200162_NguyenPhamNamAnh\NumberTranslator\ClientApp\obj\Debug\ClientApp.pdb
+E:\PBL4\PBL\ClientApp\bin\Debug\ClientApp.exe.config
+E:\PBL4\PBL\ClientApp\bin\Debug\ClientApp.exe
+E:\PBL4\PBL\ClientApp\bin\Debug\ClientApp.pdb
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.csproj.AssemblyReference.cache
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.csproj.SuggestedBindingRedirects.cache
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.ClientForm.resources
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.Properties.Resources.resources
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.csproj.GenerateResource.cache
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.csproj.CoreCompileInputs.cache
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.exe
+E:\PBL4\PBL\ClientApp\obj\Debug\ClientApp.pdb

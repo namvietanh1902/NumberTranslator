@@ -30,7 +30,8 @@ namespace ClientApp
             cbbLanguage.Items.AddRange(new LanguageCBB[]
             {
                 new LanguageCBB{value = "vi", description = "Tiếng Việt"},
-                new LanguageCBB{value = "en",description="English"}
+                new LanguageCBB{value = "en",description="English"},
+                new LanguageCBB{value = "france",description="Tiếng Pháp"}
             });
             cbbLanguage.SelectedIndex = 0;
         }

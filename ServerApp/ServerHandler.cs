@@ -80,6 +80,12 @@ namespace ServerApp
                     writer.WriteLine(translator.Translate(number));
 
                 }
+                else if (language == "france")
+                {
+                    translator = new FranceTranslator();
+                    writer.WriteLine(translator.Translate(number));
+
+                }
 
 
 
