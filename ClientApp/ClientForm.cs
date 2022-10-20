@@ -137,14 +137,17 @@ namespace ClientApp
         {   
             if (!isConnected)
             {
+                isConnected = true;
                 btnConnect.Text = "Disconnect";
                 Connect();
-                isConnected = true;
+                btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+               
             }
             else
             {   
                 isConnected = false;
                 btnConnect.Text = "Connect";
+                btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Red;
                 CloseThread();
             }
         }

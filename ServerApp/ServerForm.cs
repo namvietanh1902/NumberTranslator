@@ -26,8 +26,9 @@ namespace ServerApp
             serverHandler.updateView = new ServerHandler.UpdateView(UpdateView);
             serverHandler.clients = new List<Client>();
             dgvClient.DataSource = serverHandler.clients;
-            
-            
+            dgvClient.DefaultCellStyle.Font = new Font("Source Sans Pro",12);
+
+
         }
         bool isConnected = false;
         ServerHandler serverHandler;
@@ -66,13 +67,16 @@ namespace ServerApp
                 serverHandler.Connect();
                 isConnected = true;
                 connectBtn.Text = "Disconnect";
+                //connectBtn.FlatAppearance.BorderColor = Color.Green;
+                connectBtn.BackColor = Color.Green;
             }
             else
             {
                 serverHandler.CloseThread();
                 isConnected = false;
                 connectBtn.Text = "Connect";
-
+                //connectBtn.FlatAppearance.BorderColor = Color.Red;
+                connectBtn.BackColor = Color.Red;
             }
             
         }
