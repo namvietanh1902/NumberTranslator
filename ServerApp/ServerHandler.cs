@@ -157,9 +157,9 @@ namespace ServerApp
                                     {
                                         IP = client.Client.RemoteEndPoint.ToString(),
                                         Language = language,
-                                        Request = number
+                                        Request = String.Join(".", new VNTranslator().FormatValue(number).Reverse())
 
-                                    });
+                                    }) ;
                                 }
                                 updateView(clients);
                                 Send(stream, number, language);

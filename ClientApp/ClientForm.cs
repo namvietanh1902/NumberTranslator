@@ -30,8 +30,8 @@ namespace ClientApp
             cbbLanguage.Items.AddRange(new LanguageCBB[]
             {
                 new LanguageCBB{value = "vi", description = "Tiếng Việt"},
-                new LanguageCBB{value = "en",description="English"},
-                new LanguageCBB{value = "france",description="Tiếng Pháp"}
+                new LanguageCBB{value = "en",description="Tiếng Anh (English)"},
+                new LanguageCBB{value = "france",description="Tiếng Pháp (Francais)"}
             });
             cbbLanguage.SelectedIndex = 0;
         }
@@ -54,7 +54,7 @@ namespace ClientApp
         {
             try
             {
-                IP =  new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
+                IP =  new IPEndPoint(IPAddress.Parse("10.10.56.148"), 9000);
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client = new TcpClient();
                 client.Connect(IP);

@@ -75,18 +75,24 @@ namespace ServerApp.Translator
             int idx = 0;
             string group = "";
             int unit = 0; ;
-            string[] res = new string[1000];
+            string[] values = new string[1000];
             for (int i = val.Length - 1; i >= 0; i--)
             {
                 idx++;
                 group = val[i] + group;
                 if (idx == 3 || i < 1)
                 {
-                    res[unit++] = group;
+                    values[unit++] = group;
                     idx = 0;
                     group = "";
                 }
 
+
+            }
+            string[] res = new string[unit];
+            for (int i = 0; i < unit; i++)
+            {
+                res[i] = values[i];
 
             }
             return res;
