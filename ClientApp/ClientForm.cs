@@ -31,7 +31,7 @@ namespace ClientApp
             {
                 new LanguageCBB{value = "vi", description = "Tiếng Việt"},
                 new LanguageCBB{value = "en",description="Tiếng Anh (English)"},
-                new LanguageCBB{value = "france",description="Tiếng Pháp (Francais)"}
+                new LanguageCBB{value = "france",description="Tiếng Pháp (Francais)`"}
             });
             cbbLanguage.SelectedIndex = 0;
         }
@@ -44,7 +44,7 @@ namespace ClientApp
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if (socket != null)
+            if (client != null)
             {
                 Send();
             }
@@ -54,25 +54,25 @@ namespace ClientApp
         {
             try
             {
-                IP =  new IPEndPoint(IPAddress.Parse("10.10.56.148"), 9000);
-                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                IP =  new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
+            
                 client = new TcpClient();
                 client.Connect(IP);
                 stream = client.GetStream();
                 Task listen = new Task(Receive);
                 listen.Start();
             }
-            catch (Exception ex)
+            catch (SocketException ex)
             {
-                MessageBox.Show("Cannot connect to server");
+               
                 
             }
         }
         void CloseThread()
         {   
-            if (socket != null)
+            if (client != null)
             {
-                socket.Close();
+               
                 client.Close();
             }
             else if (stream != null)

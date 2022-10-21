@@ -180,7 +180,7 @@ namespace ServerApp.Translator
                 {
                     // Build the string to add as a prefix
                     dem += digitGroups[i].Length;
-                    if (dem < 7 || (dem-1) % 3 == 0)
+                    if (dem < 3 || groupTexts[i]=="un")
                     { 
                         prefix = groupTexts[i] + " " + _uppers[i];
                     }
