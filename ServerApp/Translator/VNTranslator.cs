@@ -92,7 +92,7 @@ namespace ServerApp.Translator
             string[] res = new string[unit];
             for (int i = 0; i < unit; i++)
             {
-                res[i] = values[i];
+                res[i] = values[i];  
 
             }
             return res;

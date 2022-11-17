@@ -24,8 +24,6 @@ namespace ServerApp
         public UpdateView updateView { get; set; }
 
 
-
-
         public void Connect()
         {
             try

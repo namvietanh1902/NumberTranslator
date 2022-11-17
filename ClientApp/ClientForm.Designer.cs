@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.cbbLanguage = new System.Windows.Forms.ComboBox();
@@ -36,9 +37,12 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtIP = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -49,9 +53,9 @@
             this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(170)))), ((int)(((byte)(109)))));
             this.btnSend.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSend.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSend.Location = new System.Drawing.Point(13, 342);
+            this.btnSend.Location = new System.Drawing.Point(61, 342);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(147, 52);
+            this.btnSend.Size = new System.Drawing.Size(177, 52);
             this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = false;
@@ -84,9 +88,9 @@
             this.btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.Font = new System.Drawing.Font("Source Sans Pro", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Location = new System.Drawing.Point(13, 33);
+            this.btnConnect.Location = new System.Drawing.Point(61, 107);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(147, 51);
+            this.btnConnect.Size = new System.Drawing.Size(177, 51);
             this.btnConnect.TabIndex = 1;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -126,16 +130,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nhập thông tin";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Source Sans Pro", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 22);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Nhập số";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -146,24 +140,59 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Ngôn ngữ";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Source Sans Pro", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 22);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Nhập số";
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.txtIP);
             this.groupBox3.Controls.Add(this.btnConnect);
             this.groupBox3.Controls.Add(this.btnSend);
             this.groupBox3.Font = new System.Drawing.Font("Source Sans Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(644, 20);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(171, 411);
+            this.groupBox3.Size = new System.Drawing.Size(297, 411);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Kết nối Server";
+            // 
+            // txtIP
+            // 
+            this.txtIP.Location = new System.Drawing.Point(61, 38);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(177, 33);
+            this.txtIP.TabIndex = 2;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Source Sans Pro", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 23);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "IP :";
             // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(847, 456);
+            this.ClientSize = new System.Drawing.Size(968, 456);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -176,6 +205,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -192,6 +222,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtIP;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

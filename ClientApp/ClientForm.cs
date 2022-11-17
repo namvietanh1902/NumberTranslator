@@ -53,14 +53,19 @@ namespace ClientApp
         void Connect() 
         {
             try
-            {
-                IP =  new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9000);
+            {   
+                if (txtIP.Text != "")
+                {
+                    string IPAdd = txtIP.Text;
+                    
+                    IP =  new IPEndPoint(IPAddress.Parse(IPAdd), 9000);
             
-                client = new TcpClient();
-                client.Connect(IP);
-                stream = client.GetStream();
-                Task listen = new Task(Receive);
-                listen.Start();
+                    client = new TcpClient();
+                    client.Connect(IP);
+                    stream = client.GetStream();
+                    Task listen = new Task(Receive);
+                    listen.Start();
+                }
             }
             catch (SocketException ex)
             {
