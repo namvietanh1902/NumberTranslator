@@ -47,9 +47,6 @@ namespace ServerApp
         }
         public void CloseThread()
         {
-
-
-            
             if(server != null)
             {
                 isStopping = true;
@@ -141,7 +138,7 @@ namespace ServerApp
                                     clients.Add(new Client
                                     {
                                         IP = client.Client.RemoteEndPoint.ToString(),
-                                        Language = "vi",
+                                        Language = "",
                                         Request = "Disconnected"
 
                                     });

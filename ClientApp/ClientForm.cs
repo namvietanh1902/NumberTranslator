@@ -36,7 +36,6 @@ namespace ClientApp
             cbbLanguage.SelectedIndex = 0;
         }
         IPEndPoint IP; 
-        Socket socket;
         TcpClient client;
         Stream stream;
         bool isConnected = false;
@@ -69,7 +68,8 @@ namespace ClientApp
             }
             catch (SocketException ex)
             {
-               
+                MessageBox.Show("Không kết nối được với server");
+                Disconnect();
                 
             }
         }
@@ -124,7 +124,8 @@ namespace ClientApp
             }
             catch(Exception ex)
             {
-                Close();
+                MessageBox.Show("Đã ngắt kết nối với server");
+                Disconnect();
             }
         }
 
@@ -137,7 +138,13 @@ namespace ClientApp
         {
 
         }
-
+        void Disconnect()
+        {
+            isConnected = false;
+            btnConnect.Text = "Connect";
+            btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            CloseThread();
+        }
         private void btnConnect_Click(object sender, EventArgs e)
         {   
             if (!isConnected)
@@ -149,11 +156,9 @@ namespace ClientApp
                
             }
             else
-            {   
-                isConnected = false;
-                btnConnect.Text = "Connect";
-                btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-                CloseThread();
+            {
+                Disconnect();
+                
             }
         }
 
