@@ -20,6 +20,7 @@ namespace ServerApp
         bool isStopping = false;
 
         public List<Client> clients { get; set; }
+        public List<TcpClient> sockets = new List<TcpClient> { };
         public delegate void UpdateView(List<Client> clients) ;
         public UpdateView updateView { get; set; }
 
@@ -30,10 +31,11 @@ namespace ServerApp
             {
 
                 IP = new IPEndPoint(IPAddress.Any, 9000);
-
+                
                 server = new TcpListener(IP);
                 server.Start();
                 Task listen = new Task(Receive);
+                
                 listen.Start();
 
 
@@ -50,6 +52,14 @@ namespace ServerApp
             if(server != null)
             {
                 isStopping = true;
+                foreach (TcpClient socket in sockets)
+                {
+                    if (socket != null)
+                    {
+                        socket.Close();
+                    }
+
+                }
                 server.Stop();
 
             }
@@ -110,9 +120,9 @@ namespace ServerApp
             }
             return sConnected;
         }
-
         void Receive()
         {
+            isStopping = false;
             try
             {
                 while (true)
@@ -123,7 +133,9 @@ namespace ServerApp
                         try
                         {
                             var client = server.AcceptTcpClient();
+                            sockets.Add(client);
                             Stream stream = client.GetStream();
+                            
 
 
                             while (TestConnection(client))
@@ -132,13 +144,13 @@ namespace ServerApp
                                 string str = reader.ReadLine();
                                 string language = null;
                                 string number = null;
-
+                                
                                 if (str == null)
                                 {
                                     clients.Add(new Client
                                     {
                                         IP = client.Client.RemoteEndPoint.ToString(),
-                                        Language = "",
+                                        Language = "notify",
                                         Request = "Disconnected"
 
                                     });
@@ -154,15 +166,17 @@ namespace ServerApp
                                         Language = language,
                                         Request = String.Join(".", new VNTranslator().FormatValue(number).Reverse())
 
-                                    }) ;
+                                    });
                                 }
                                 updateView(clients);
                                 Send(stream, number, language);
 
                             }
-                            client.Close();
+                            sockets.Remove(client);
                             stream.Close();
+                            client.Close();
                         }
+
 
                         catch (Exception err)
                         {

@@ -52,7 +52,8 @@ namespace ClientApp
         void Connect() 
         {
             try
-            {   
+            {
+                
                 if (txtIP.Text != "")
                 {
                     string IPAdd = txtIP.Text;
@@ -65,6 +66,15 @@ namespace ClientApp
                     Task listen = new Task(Receive);
                     listen.Start();
                 }
+                new Task(async () =>
+                {
+                    while (IsConnected())
+                    {
+                        await Task.Delay(500);
+                    };
+                    Disconnect();
+
+                }).Start();
             }
             catch (SocketException ex)
             {
@@ -87,7 +97,7 @@ namespace ClientApp
         }
         void Send()
         {   
-            if (txtInput.Text != String.Empty)
+            if (txtInput.Text != String.Empty&&isConnected)
             {
                 var validator = new ClientApp.Validator.NumberValidator();
                 var txt = txtInput.Text;
@@ -116,10 +126,18 @@ namespace ClientApp
                 {
                     var reader = new StreamReader(stream);
                     string str = reader.ReadLine();
+                    if (str == "Disconnect")
+                    {
+                        Disconnect();
+                    }
+                    else
+                    {
+
                     Invoke(new MethodInvoker(() =>
                     {
                         txtResult.Text = str;
                     }));
+                    }
                 }
             }
             catch(Exception ex)
@@ -137,6 +155,17 @@ namespace ClientApp
         private void ClientForm_Load(object sender, EventArgs e)
         {
 
+        }
+        public bool IsConnected()
+        {
+            try
+            {
+                return (client != null && !((client.Client.Poll(1000, SelectMode.SelectRead) && (client.Client.Available == 0)) || !client.Client.Connected));
+            }
+            catch (ObjectDisposedException)
+            {
+                return false;
+            }
         }
         void Disconnect()
         {

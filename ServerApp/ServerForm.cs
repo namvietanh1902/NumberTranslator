@@ -95,6 +95,7 @@ namespace ServerApp
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             serverHandler.CloseThread();
+            
 
         }
     }
