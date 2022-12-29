@@ -23,19 +23,20 @@ namespace ServerApp
         public List<TcpClient> sockets = new List<TcpClient> { };
         public delegate void UpdateView(List<Client> clients) ;
         public UpdateView updateView { get; set; }
-
+        public ServerHandler()
+        {
+            IP = new IPEndPoint(IPAddress.Any, 9000);
+            server = new TcpListener(IP);
+        }
 
         public void Connect()
         {
             try
             {
 
-                IP = new IPEndPoint(IPAddress.Any, 9000);
                 
-                server = new TcpListener(IP);
                 server.Start();
                 Task listen = new Task(Receive);
-                
                 listen.Start();
 
 
@@ -168,8 +169,8 @@ namespace ServerApp
 
                                     });
                                 }
-                                updateView(clients);
                                 Send(stream, number, language);
+                                updateView(clients);
 
                             }
                             sockets.Remove(client);
@@ -180,7 +181,7 @@ namespace ServerApp
 
                         catch (Exception err)
                         {
-                            if (!isStopping) throw;
+                            //if (!isStopping) throw;
                         }
                     });
 

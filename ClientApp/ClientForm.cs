@@ -63,6 +63,8 @@ namespace ClientApp
                     client = new TcpClient();
                     client.Connect(IP);
                     stream = client.GetStream();
+                    
+
                     Task listen = new Task(Receive);
                     listen.Start();
                 }
@@ -113,7 +115,7 @@ namespace ClientApp
                 {
                     MessageBox.Show("Số nhập vào không đúng format", "Lỗi người dùng");
                 }
-                txtInput.Text = String.Empty;
+                
             }
            
         }
