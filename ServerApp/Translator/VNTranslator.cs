@@ -55,6 +55,7 @@ namespace ServerApp.Translator
                             }
                         default:
                             {
+                                
                                 groupText += " " + _units[units];
                                 break;
 
@@ -64,7 +65,10 @@ namespace ServerApp.Translator
                 }
             }
             else if (tensUnits != 0)
+            {
+                if (tens < 1 && hundreds !=0) groupText += " Lẻ ";
                 groupText += _units[tensUnits];
+            }
 
             return groupText;
 
